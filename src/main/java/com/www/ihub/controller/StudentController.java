@@ -92,7 +92,7 @@ public class StudentController
 			return ResponseEntity.ok("Student updated successfully");
 		}
 		else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stdent was not updated");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student was not updated");
 		}
 		
 	}
