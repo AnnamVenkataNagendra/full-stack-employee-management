@@ -34,7 +34,6 @@ public class StudentConfg
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/stu/login","/stu/post").permitAll()
 	            .anyRequest().authenticated());
-
 	    return security.build();
 	}
 	
