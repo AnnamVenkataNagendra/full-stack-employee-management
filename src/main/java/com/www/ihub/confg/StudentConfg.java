@@ -39,6 +39,7 @@ public class StudentConfg
 
 	    security
 	        .csrf(csrf -> csrf.disable())
+	        .cors(cors -> {})
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/stu/login","/stu/post").permitAll()
 	            .anyRequest().authenticated())
