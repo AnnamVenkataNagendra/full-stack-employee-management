@@ -24,7 +24,6 @@ import com.www.ihub.token.StudentToken;
 
 @RestController
 @RequestMapping("/stu")
-@CrossOrigin(origins = "https://full-stack-employee-management.onrender.com")
 public class StudentController 
 {
 	@Autowired
