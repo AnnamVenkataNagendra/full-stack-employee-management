@@ -34,12 +34,16 @@ public class StudentToken {
 	public String validateUserToken(String name)
 	{
 		
-		return Jwts.parserBuilder()
+		String token=Jwts.parserBuilder()
 				.setSigningKey(secretKey)
 				.build()
 				.parseClaimsJws(name)
 				.getBody()
 				.getSubject();
+		
+		System.out.println(token);
+
+		return token;
 		
 	}
 	

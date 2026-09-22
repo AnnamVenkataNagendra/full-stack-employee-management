@@ -1,21 +1,21 @@
+
+server:
+  port:  ${PORT:8080}
 spring:
   application:
     name: student_details
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_URL:jdbc:mysql://student-db.c4j2guameg9j.us-east-1.rds.amazonaws.com:3306/login}
-    username: ${DB_USERNAME:admin}
-    password: ${DB_PASSWORD:adminroot}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
-      ddl-auto: update 
+      ddl-auto: update
     show-sql: true
     generate-ddl: true
 
   main:
     allow-circular-references: true
-
-server:
-  port: ${PORT:8080}

@@ -1,5 +1,6 @@
 package com.www.ihub.service;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -57,5 +58,29 @@ public class StudentService implements UserDetailsService
 		
 		return new User(entity.getStuName(),entity.getStuPass(),
 				List.of(new SimpleGrantedAuthority("ROLE_USER")));
+	}
+	
+	public boolean deleteStudent(int id) {
+	
+		if(!repo.existsById(id)) {
+			return false;
+		}
+		  repo.deleteById(id);
+	        return true;
+	}
+
+	public boolean updataStudent(int id ,StudentEntity entity) {
+		Optional<StudentEntity> op =repo.findById(id);
+		
+		if(op.isPresent()) {
+			StudentEntity st=op.get();
+			st.setStuName(entity.getStuName());
+			st.setStuCollege(entity.getStuCollege());
+			st.setStuLocation(entity.getStuLocation());
+		
+			repo.save(st);
+			return true;
+		}
+		return false;
 	}
 }

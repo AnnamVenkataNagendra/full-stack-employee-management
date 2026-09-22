@@ -1,14 +1,19 @@
 package com.www.ihub.controller;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +24,7 @@ import com.www.ihub.token.StudentToken;
 
 @RestController
 @RequestMapping("/stu")
-@CrossOrigin(origins = "https://student-app-8m7i.onrender.com")
+@CrossOrigin(origins = "https://full-stack-employee-management.onrender.com")
 public class StudentController 
 {
 	@Autowired
@@ -49,7 +54,7 @@ public class StudentController
 	@PostMapping("/login")
 	public ResponseEntity<String> responseEntity(@RequestBody StudentEntity entity){
 		
-		UsernamePasswordAuthenticationToken token=
+		Authentication token=
 				new UsernamePasswordAuthenticationToken(entity.getStuName(), entity.getStuPass());
  
        org.springframework.security.core.Authentication authentication=manager.authenticate(token);
@@ -63,5 +68,32 @@ public class StudentController
 		}
 		
 	}
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> responseEntity(@PathVariable int id){
+		
+		boolean delete=service.deleteStudent(id);
+		if(delete) {
+			
+			return ResponseEntity.ok("Student deleted successfully");
+					
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stdent id not found");
+		}
+		
+	}
 	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<?> response(@PathVariable int id, @RequestBody StudentEntity entity)
+	{
+		boolean b=service.updataStudent(id,entity);
+		if(b) {
+			return ResponseEntity.ok("Student updated successfully");
+		}
+		else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Stdent was not updated");
+		}
+		
+	}
 }
